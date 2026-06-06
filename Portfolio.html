@@ -1,0 +1,766 @@
+# 🚀 ULTRA MODERN PORTFOLIO WEBSITE
+
+Save this as `index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#050816;
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+width:500px;
+height:500px;
+background:#00f0ff33;
+filter:blur(120px);
+top:-100px;
+left:-100px;
+z-index:-1;
+}
+
+body::after{
+content:'';
+position:fixed;
+width:500px;
+height:500px;
+background:#8b5cf633;
+filter:blur(120px);
+bottom:-100px;
+right:-100px;
+z-index:-1;
+}
+
+/* NAVBAR */
+nav{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:rgba(0,0,0,0.3);
+backdrop-filter:blur(15px);
+z-index:1000;
+border-bottom:1px solid rgba(255,255,255,0.1);
+}
+
+.logo{
+font-size:32px;
+font-weight:800;
+background:linear-gradient(to right,#00f0ff,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav ul{
+display:flex;
+list-style:none;
+gap:30px;
+}
+
+nav ul li a{
+text-decoration:none;
+color:white;
+font-weight:500;
+transition:0.3s;
+position:relative;
+}
+
+nav ul li a::after{
+content:'';
+position:absolute;
+left:0;
+bottom:-5px;
+width:0%;
+height:2px;
+background:#00f0ff;
+transition:0.4s;
+}
+
+nav ul li a:hover::after{
+width:100%;
+}
+
+nav ul li a:hover{
+color:#00f0ff;
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:120px 8%;
+position:relative;
+}
+
+.hero-content{
+text-align:center;
+max-width:900px;
+animation:fadeUp 1.2s ease;
+}
+
+.hero-content h3{
+font-size:25px;
+color:#00f0ff;
+margin-bottom:15px;
+}
+
+.hero-content h1{
+font-size:85px;
+line-height:1.1;
+margin-bottom:25px;
+}
+
+.hero-content h1 span{
+background:linear-gradient(to right,#00f0ff,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero-content p{
+font-size:20px;
+line-height:1.9;
+color:#d1d5db;
+margin-bottom:40px;
+}
+
+.hero-btns{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:15px 35px;
+border:none;
+border-radius:50px;
+font-size:16px;
+font-weight:600;
+text-decoration:none;
+transition:0.4s;
+cursor:pointer;
+}
+
+.primary-btn{
+background:linear-gradient(to right,#00f0ff,#8b5cf6);
+color:white;
+box-shadow:0 10px 35px rgba(0,240,255,0.3);
+}
+
+.primary-btn:hover{
+transform:translateY(-7px) scale(1.05);
+}
+
+.secondary-btn{
+border:2px solid #00f0ff;
+color:#00f0ff;
+background:transparent;
+}
+
+.secondary-btn:hover{
+background:#00f0ff;
+color:black;
+transform:translateY(-7px);
+}
+
+/* SOCIAL */
+.social-icons{
+margin-top:40px;
+display:flex;
+justify-content:center;
+gap:20px;
+}
+
+.social-icons a{
+width:55px;
+height:55px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#111827;
+border-radius:50%;
+color:#00f0ff;
+font-size:22px;
+transition:0.4s;
+text-decoration:none;
+}
+
+.social-icons a:hover{
+transform:translateY(-10px) rotate(360deg);
+background:#00f0ff;
+color:black;
+}
+
+/* SECTION */
+section{
+padding:110px 8%;
+}
+
+.section-title{
+text-align:center;
+font-size:55px;
+margin-bottom:70px;
+font-weight:700;
+background:linear-gradient(to right,#00f0ff,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+/* ABOUT */
+.about-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:50px;
+align-items:center;
+}
+
+.about-image img{
+width:100%;
+border-radius:30px;
+box-shadow:0 20px 50px rgba(0,0,0,0.5);
+transition:0.5s;
+}
+
+.about-image img:hover{
+transform:scale(1.04) rotate(-1deg);
+}
+
+.about-text p{
+font-size:18px;
+line-height:2;
+color:#d1d5db;
+}
+
+/* SKILLS */
+.skills-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.skill-card{
+background:rgba(255,255,255,0.05);
+padding:40px 25px;
+border-radius:25px;
+text-align:center;
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+transition:0.5s;
+}
+
+.skill-card:hover{
+transform:translateY(-12px) scale(1.03);
+box-shadow:0 20px 50px rgba(0,240,255,0.2);
+}
+
+.skill-card i{
+font-size:55px;
+margin-bottom:20px;
+color:#00f0ff;
+}
+
+.skill-card h3{
+margin-bottom:15px;
+font-size:24px;
+}
+
+.skill-card p{
+color:#d1d5db;
+line-height:1.7;
+}
+
+/* PROJECTS */
+.projects-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
+}
+
+.project-card{
+background:rgba(255,255,255,0.05);
+border-radius:30px;
+overflow:hidden;
+transition:0.5s;
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.project-card:hover{
+transform:translateY(-15px);
+box-shadow:0 20px 50px rgba(139,92,246,0.3);
+}
+
+.project-card img{
+width:100%;
+height:240px;
+object-fit:cover;
+}
+
+.project-info{
+padding:30px;
+}
+
+.project-info h3{
+font-size:28px;
+margin-bottom:15px;
+}
+
+.project-info p{
+line-height:1.8;
+color:#d1d5db;
+}
+
+/* CONTACT */
+.contact-box{
+max-width:800px;
+margin:auto;
+background:rgba(255,255,255,0.05);
+padding:50px;
+border-radius:30px;
+backdrop-filter:blur(15px);
+text-align:center;
+border:1px solid rgba(255,255,255,0.1);
+}
+
+.contact-box h2{
+margin-bottom:20px;
+font-size:40px;
+}
+
+.contact-box p{
+font-size:18px;
+line-height:1.8;
+color:#d1d5db;
+margin-bottom:30px;
+}
+
+.contact-details{
+display:flex;
+justify-content:center;
+gap:25px;
+flex-wrap:wrap;
+}
+
+.contact-details div{
+background:#111827;
+padding:18px 25px;
+border-radius:15px;
+transition:0.4s;
+}
+
+.contact-details div:hover{
+transform:translateY(-8px);
+background:#00f0ff;
+color:black;
+}
+
+/* FOOTER */
+footer{
+padding:30px;
+text-align:center;
+background:#020617;
+color:#94a3b8;
+font-size:15px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(50px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.reveal{
+opacity:0;
+transform:translateY(60px);
+transition:1s;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:50px;
+}
+
+.section-title{
+font-size:40px;
+}
+
+nav ul{
+display:none;
+}
+
+.hero-content p{
+font-size:17px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<div class="logo">PORTFOLIO</div>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<h3>Hello, I'm</h3>
+
+<h1><span>ANIQUA MUSKAAN</span><br>WEB Developer</h1>
+
+<p>
+“I’m a creative and detail-oriented Web Developer who builds modern, 
+responsive, and user-friendly websites with clean design and smooth functionality. 
+Passionate about crafting interactive digital experiences, 
+I specialize in transforming ideas into visually stunning 
+and high-performing web applications using HTML,
+ CSS, JavaScript, and modern web technologies.”
+
+</p>
+
+<div class="hero-btns">
+<a href="#projects" class="btn primary-btn">View Projects</a>
+<a href="#contact" class="btn secondary-btn">Hire Me</a>
+</div>
+
+<div class="social-icons">
+<a href="#"><i class="fab fa-github"></i></a>
+<a href="#"><i class="fab fa-linkedin"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+
+<h2 class="section-title reveal">About Me</h2>
+
+<div class="about-container">
+
+<div class="about-image reveal">
+<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop">
+</div>
+
+<div class="about-text reveal">
+<p>
+“I am a passionate and creative Web Developer who enjoys building modern, responsive, 
+and interactive websites that deliver an engaging user experience. 
+I love turning ideas into real digital experiences through clean 
+code, innovative designs, smooth animations, and visually appealing layouts.
+
+My focus is on creating websites that are not only attractive but also
+ fast, user-friendly, and fully responsive across all devices. 
+ I enjoy experimenting with modern UI designs, interactive features, 
+ and creative web elements to make every project unique and professional.
+
+As a developer, I am continuously learning and improving my skills 
+in HTML, CSS, JavaScript, and modern web technologies to stay updated.
+ My ambition is to grow into a skilled Full-Stack Developer and build impactful,
+  high-quality projects that combine creativity, functionality, and performance.”
+
+</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+
+<h2 class="section-title reveal">Skills</h2>
+
+<div class="skills-grid">
+
+<div class="skill-card reveal">
+<i class="fab fa-html5"></i>
+<h3>HTML5</h3>
+<p>Creating structured and semantic web pages.</p>
+</div>
+
+<div class="skill-card reveal">
+<i class="fab fa-css3-alt"></i>
+<h3>CSS3</h3>
+<p>Modern responsive layouts and beautiful animations.</p>
+</div>
+
+<div class="skill-card reveal">
+<i class="fab fa-js"></i>
+<h3>JavaScript</h3>
+<p>Interactive websites with dynamic functionality.</p>
+</div>
+
+<div class="skill-card reveal">
+<i class="fab fa-github"></i>
+<h3>GitHub</h3>
+<p>Project management and deployment hosting.</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+
+<h2 class="section-title reveal">Projects</h2>
+
+<div class="projects-grid">
+
+<!-- PROJECT 1 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Calculator App</h3>
+<p>
+Professional calculator with keyboard support,
+real-time calculations and premium UI.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 2 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>E-Commerce Website</h3>
+<p>
+Modern shopping website with product cards,
+cart system and responsive design.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 3 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Music Player</h3>
+<p>
+Advanced music player with stylish animations
+and smooth controls.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 4 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Portfolio Website</h3>
+<p>
+Modern responsive portfolio with glassmorphism UI,
+smooth animations and interactive sections.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 5 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Image Gallery</h3>
+<p>
+Responsive image gallery with categories,
+lightbox preview, dark mode and smooth UX.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 6 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Landing Page</h3>
+<p>
+High-converting landing page with modern UI,
+clean layout and responsive design.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 7 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Travel Explorer</h3>
+<p>
+Interactive travel website showcasing destinations,
+packages and smooth animations.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 8 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Static Website</h3>
+<p>
+Fully responsive static website built using HTML & CSS
+with clean structure and professional layout.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 9 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Project Management App</h3>
+<p>
+Task management UI with project tracking,
+status updates and dashboard-style layout.
+</p>
+</div>
+</div>
+
+<!-- PROJECT 10 -->
+<div class="project-card reveal">
+<img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1200&auto=format&fit=crop">
+
+<div class="project-info">
+<h3>Interactive Web App</h3>
+<p>
+Dynamic web application with JavaScript interactivity,
+animations and modern UI logic.
+</p>
+</div>
+</div>
+
+</div>
+
+</section>
+<!-- CONTACT -->
+<section id="contact">
+
+<div class="contact-box reveal">
+
+<h2>Contact Me</h2>
+
+<p>
+Interested in working together? Feel free to contact me.
+</p>
+
+<div class="contact-details">
+<div>Email: aniquamuskaan@gmail.com</div>
+<div>Phone: +91 9876543210</div>
+<div>
+GitHub: 
+<a href="https://github.com/aniquamuskaan3" target="_blank">
+https://github.com/aniquamuskaan3
+</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+© 2026 ANIQUA MUSKAAN| All Rights Reserved
+</footer>
+
+<!-- JAVASCRIPT -->
+<script>
+
+// SCROLL REVEAL
+window.addEventListener('scroll',reveal);
+
+function reveal(){
+
+let reveals=document.querySelectorAll('.reveal');
+
+for(let i=0;i<reveals.length;i++){
+
+let windowHeight=window.innerHeight;
+let revealTop=reveals[i].getBoundingClientRect().top;
+let revealPoint=100;
+
+if(revealTop < windowHeight - revealPoint){
+reveals[i].classList.add('active');
+}
+
+}
+
+}
+
+reveal();
+
+</script>
+
+</body>
+</html>
+
+
